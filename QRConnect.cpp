@@ -469,6 +469,12 @@ public:
 				break;
 			}
 		}
+		WCHAR cp_profile_name[WLAN_MAX_NAME_LENGTH]{};
+		if (cp.strProfile == NULL)
+		{
+			wcsncpy_s(cp_profile_name, ssid.data(), ssid.length());
+			cp.strProfile = cp_profile_name;
+		}
 		CHECK(cp.strProfile, "WLAN profile not found");
 
 		CHECK_DW(WlanDisconnect(m_hClient, &m_guidIF, NULL));
@@ -505,8 +511,6 @@ QRRead(BYTE* data, wchar_t* qrText)
 	qrText[r.text().length()] = 0;
 
 	auto [ssid, password] = WlanManager::GetCredentialsFromQrText(qrText);
-	if (ssid.empty())
-		return E_FAIL;
 	return ssid.empty() ? E_FAIL : S_OK;
 }
 
