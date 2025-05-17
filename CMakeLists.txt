@@ -8,7 +8,7 @@ set(BUILD_SHARED_LIBS OFF)
 set(FETCHCONTENT_QUIET OFF)
 include(FetchContent)
 FetchContent_Declare(zxing-cpp
-	GIT_REPOSITORY git@github.com:zxing-cpp/zxing-cpp.git
+	GIT_REPOSITORY https://github.com/zxing-cpp/zxing-cpp.git
 	GIT_SHALLOW TRUE
 	GIT_TAG v2.1.0)
 FetchContent_MakeAvailable(zxing-cpp)
